@@ -57,9 +57,11 @@ for word in words_of_length:
 
 # 2. Test remove_words_from_unique_words_set function which removes words from the unique words set and adds them to a separate set (file) #
 #####################################################################################################################################
-
 words_to_remove = CONFIGS.FUNC2_ADD_TO_REMOVED_WORDS  # Replace with the words you want to remove
-remove_words_from_unique_words_set(words_to_remove, 'unique_words.txt', 'removed_words.txt')
+if words_to_remove is None or '':
+    pass
+else:
+    remove_words_from_unique_words_set(words_to_remove, f'{CONFIGS.UNIQUE_WORDS_FILENAME}', 'removed_words.txt')
 
 # 3. Read a string from a file and print some additional information about the input string with the help of count_whitespaces_and_newlines and count_words functions #
 #######################################################################################################################################################################
@@ -90,7 +92,8 @@ try:
         # Use ast.literal_eval to safely evaluate the string as a Python literal
         unique_words = ast.literal_eval(file.read())
 except FileNotFoundError:
-    unique_words = set()
+    # TODO: add logging message
+    print(CONFIGS.FUNC4_READ_UNIQUE_WORDS_FILEPATH)
 
 # Check if there are any non-English words in the unique words set with nltk words corpus
 # non_english_words = identify_non_english_words(unique_words)
@@ -144,7 +147,7 @@ if CONFIGS.UPDATE_UNIQUE_WORDS_FILE:
     # Make a set of unique words from word_frequencies (created in step 4 with list_words_by_frequency) text file which is the result of the latest run of the script.
     new_unique_words = set(word for word, _ in word_frequencies)
     # Read removed_words.txt and remove any words that are in the removed words set from the new_unique_words set
-    removed_words_path = os.path.join(r'C:\Users\hoffi\Documents\GitHub\2025\practice1', 'removed_words.txt') # Hardcoded path, but unlikely to change
+    removed_words_path = os.path.join(fr'{os.getcwd()}, removed_words.txt') # Hardcoded path, but unlikely to change
 
     try:
         with open(removed_words_path, 'r', encoding='utf-8') as file:
@@ -170,7 +173,7 @@ if CONFIGS.UPDATE_UNIQUE_WORDS_FILE:
 
     # Write the latest new unique words to a separate file for further inspection
     if new_words_added:
-        with open(r'C:\Users\hoffi\Documents\GitHub\2025\practice1\newest_unique_words.txt', 'w', encoding='utf-8') as file: # Hardcoded path, but unlikely to change
+        with open(fr'{os.getcwd()}\newest_unique_words.txt', 'w', encoding='utf-8') as file: # Hardcoded path, but unlikely to change
             for word in new_words_added:
                 file.write(f"{word}\n")
         print(f"Updated newest_unique_words.txt")
@@ -204,7 +207,7 @@ if CONFIGS.FIND_WORDS_AFTER:
 
 # 9. Find sentences from a file (FUNC9_READ_FILEPATH=INPUT_STRING_FILEPATH, it's usually location of input.txt) that contain a specified word #
 ###############################################################################################################################################
-# Valid words to search should be in the following file but it could change (check step 3 and 4): "C:\Users\hoffi\Documents\GitHub\2025\practice1\word_frequencies2.txt"
+# Valid words to search should be in the following file but it could change (check step 3 and 4)
 
 if not CONFIGS.FUNC9_WORD_TO_SEARCH:
     pass

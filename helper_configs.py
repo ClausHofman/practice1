@@ -11,8 +11,8 @@ FUNC10_WORD_FREQUENCY = 1
 # Paths and filenames #
 #######################
 # Get current working directory with os.getcwd() or replace with other path
-unique_words_filepath = fr'{os.getcwd()}\unique_words.txt'
-unique_words_filename = os.path.basename(unique_words_filepath)
+unique_words_filename = 'unique_words.txt'
+unique_words_filepath = os.path.join(os.getcwd(), unique_words_filename)
 
 # Find words ending with a specified prefix/suffix from word frequencies file read and the write paths
 FUNC6_READ_FILENAME = fr'{os.getcwd()}\word_frequencies2.txt'
@@ -128,7 +128,7 @@ class Config:
         # Filepath to read unique words
         self.UNIQUE_WORDS_PATH = config_data.get('UNIQUE_WORDS_PATH', f'{unique_words_filepath}')
         # Unique words filename
-        self.UNIQUE_WORDS_FILENAME = config_data.get('UNIQUE_WORDS_FILE', 'unique_words.txt')
+        self.UNIQUE_WORDS_FILENAME = config_data.get('UNIQUE_WORDS_FILE', unique_words_filename)
         # Setting to control updating the unique words file
         self.UPDATE_UNIQUE_WORDS_FILE = config_data.get('UPDATE_UNIQUE_WORDS_FILE', True)
 
@@ -154,7 +154,8 @@ config_a = {
     # Filepath to write word frequencies for list_words_by_frequency
     "FUNC4_WRITE_WORD_FREQUENCIES_FILEPATH": fr'{os.getcwd()}/word_frequencies2.txt',
     # Filepath to read unique words for list_words_by_frequency
-    "FUNC4_READ_UNIQUE_WORDS_FILEPATH": f'{unique_words_filepath}/{unique_words_filename}',
+    
+    "FUNC4_READ_UNIQUE_WORDS_FILEPATH": f'{unique_words_filepath}',
 
     # 5.
     # Suffix to find words with find_words_ending_with_from_set (5)

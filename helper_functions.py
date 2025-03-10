@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 def list_words_of_length(active, length, unique_words_filename):
     if not active:
         return []
-    unique_words_path = os.path.join(r'C:\Users\hoffi\Documents\GitHub\2025\practice1', unique_words_filename)
+    unique_words_path = os.path.join(fr'{os.getcwd()}', unique_words_filename)
     
     try:
         with open(unique_words_path, 'r', encoding='utf-8') as file:
@@ -29,8 +29,11 @@ def list_words_of_length(active, length, unique_words_filename):
 
 # 2.
 def remove_words_from_unique_words_set(words_to_remove, unique_words_filename, removed_words_filename):
-    unique_words_path = os.path.join(r'C:\Users\hoffi\Documents\GitHub\2025\practice1', unique_words_filename)
-    removed_words_path = os.path.join(r'C:\Users\hoffi\Documents\GitHub\2025\practice1', removed_words_filename)
+    if not all(isinstance(item, str) for item in words_to_remove):
+        raise ValueError("Not all elements in the list are strings!")
+
+    unique_words_path = os.path.join(fr'{os.getcwd()}', unique_words_filename)
+    removed_words_path = os.path.join(fr'{os.getcwd()}', removed_words_filename)
     
     try:
         with open(unique_words_path, 'r', encoding='utf-8') as file:
@@ -191,8 +194,8 @@ def find_words_ending_with_from_file(suffix, read_filename, write_target_filenam
         print("find_words_ending_with_from_file: Suffix is empty. No operation performed.")
         return []
 
-    read_file_path = os.path.join(r'C:\Users\hoffi\Documents\GitHub\2025\practice1', read_filename)
-    write_target_file_path = os.path.join(r'C:\Users\hoffi\Documents\GitHub\2025\practice1', write_target_filename)
+    read_file_path = os.path.join(fr'{os.getcwd()}', read_filename)
+    write_target_file_path = os.path.join(fr'{os.getcwd()}', write_target_filename)
     word_frequencies = []
     try:
         with open(read_file_path, 'r', encoding='utf-8') as file:
@@ -246,8 +249,8 @@ def find_words_starting_with_from_file(prefix, read_filename, write_target_filen
         print("find_words_starting_with_from_file: Prefix is empty. No operation performed.")
         return []
 
-    read_file_path = os.path.join(r'C:\Users\hoffi\Documents\GitHub\2025\practice1', read_filename)
-    write_target_file_path = os.path.join(r'C:\Users\hoffi\Documents\GitHub\2025\practice1', write_target_filename)
+    read_file_path = os.path.join(fr'{os.getcwd()}', read_filename)
+    write_target_file_path = os.path.join(fr'{os.getcwd()}', write_target_filename)
     word_frequencies = []
     try:
         with open(read_file_path, 'r', encoding='utf-8') as file:
